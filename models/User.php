@@ -1,7 +1,8 @@
 <?php
 class User
 {
-    private string $id;
+    private ?int $id;
+    private string $ssn;
     private string $name;
     private string $dob;
     private string $email;
@@ -12,9 +13,10 @@ class User
     private string $password;
     private string $image;
 
-    public function __construct($id, $name, $dob, $email, $phone, $role, $qualification, $username, $password, $image = 'user_profile.jpg')
+    public function __construct(?int $id, $ssn, $name, $dob, $email, $phone, $role, $qualification, $username, $password, $image = 'user_profile.jpg')
     {
         $this->id = $id;
+        $this->ssn = $ssn;
         $this->name = $name;
         $this->dob = $dob;
         $this->email = $email;
@@ -26,14 +28,28 @@ class User
         $this->image = $image;
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
-        return $this->id;
+        if (is_null($this->id)) {
+            return null;
+        }
+
+        return str_pad($this->id, 10, '0', STR_PAD_LEFT);
     }
 
-    public function setId(string $id): void
+    public function setId(int $id): void
     {
         $this->id = $id;
+    }
+
+    public function getSsn(): string
+    {
+        return $this->ssn;
+    }
+
+    public function setSsn(string $ssn)
+    {
+        $this->ssn = $ssn;
     }
 
     public function getName(): string
@@ -139,7 +155,8 @@ class User
     public static function fromArray(array $data): User
     {
         return new User(
-            $data['id'],
+            isset($data['id']) ? (int) $data['id'] : null,
+            $data['ssn'],
             $data['name'],
             $data['dob'],
             $data['email'],
@@ -173,35 +190,32 @@ class User
 
     public function save(DatabaseHelper $databaseHelper): bool
     {
-        $sql = "
-            INSERT INTO `user` (id, name, dob, email, phone, role, qualification, username, password, image)
-            VALUES (:id, :name, :dob, :email, :phone, :role, :qualification, :username, :password, :image)
-            ON DUPLICATE KEY UPDATE
-                name = VALUES(name),
-                dob = VALUES(dob),
-                email = VALUES(email),
-                phone = VALUES(phone),
-                role = VALUES(role),
-                qualification = VALUES(qualification),
-                username = VALUES(username),
-                password = VALUES(password),
-                image = VALUES(image)
-        ";
+        $sql = $this->id === null
+            ? "INSERT INTO `user` (name, dob, email, phone, role, qualification, username, password, image, ssn)
+            VALUES (:name, :dob, :email, :phone, :role, :qualification, :username, :password, :image, :ssn)"
+            : "UPDATE `user` SET name = :name, dob = :dob, email = :email, phone = :phone, role = :role, 
+            qualification = :qualification, username = :username, password = :password, image = :image, ssn = :ssn WHERE id = :id";
+
+        $params = [
+            'name' => $this->name,
+            'dob' => $this->dob,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'role' => $this->role,
+            'qualification' => $this->qualification,
+            'username' => $this->username,
+            'password' => $this->password,
+            'image' => $this->image,
+            'ssn' => $this->ssn
+        ];
+
+        if (!is_null($this->id)) {
+            $params['id'] = $this->id;
+        }
 
         return $databaseHelper->execute(
             $sql,
-            [
-                'id' => $this->id,
-                'name' => $this->name,
-                'dob' => $this->dob,
-                'email' => $this->email,
-                'phone' => $this->phone,
-                'role' => $this->role,
-                'qualification' => $this->qualification,
-                'username' => $this->username,
-                'password' => $this->password,
-                'image' => $this->image,
-            ]
+            $params
         );
     }
 
@@ -210,6 +224,7 @@ class User
         $sql = "DELETE FROM `user` WHERE `id` = :id";
         return $databaseHelper->execute($sql, ['id' => $this->id]);
     }
+
 }
 
 ?>

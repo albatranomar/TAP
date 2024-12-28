@@ -184,30 +184,21 @@ class Task
                 start_date = :start_date, end_date = :end_date, effort = :effort, 
                 status = :status, priority = :priority, progress = :progress WHERE id = :id";
 
-        $params = $this->id === null
-            ? [
-                'name' => $this->name,
-                'description' => $this->description,
-                'project_id' => $this->project_id,
-                'start_date' => $this->start_date,
-                'end_date' => $this->end_date,
-                'effort' => $this->effort,
-                'status' => $this->status,
-                'priority' => $this->priority,
-                'progress' => $this->progress,
-            ]
-            : [
-                'id' => $this->id,
-                'name' => $this->name,
-                'description' => $this->description,
-                'project_id' => $this->project_id,
-                'start_date' => $this->start_date,
-                'end_date' => $this->end_date,
-                'effort' => $this->effort,
-                'status' => $this->status,
-                'priority' => $this->priority,
-                'progress' => $this->progress,
-            ];
+        $params = [
+            'name' => $this->name,
+            'description' => $this->description,
+            'project_id' => $this->project_id,
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
+            'effort' => $this->effort,
+            'status' => $this->status,
+            'priority' => $this->priority,
+            'progress' => $this->progress,
+        ];
+
+        if (!is_null($this->id)) {
+            $params['id'] = $this->id;
+        }
 
         return $databaseHelper->execute($sql, $params);
     }
