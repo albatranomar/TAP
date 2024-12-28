@@ -28,10 +28,13 @@ header {
     text-decoration: none;
     color: blueviolet;
     margin-right: 15px;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 .nav-links a:hover {
-    text-decoration: underline;
+    background-color: blueviolet;
+    color: white;
 }
 
 .user-section {
@@ -54,7 +57,8 @@ header {
 }
 
 .user-section a:hover {
-    text-decoration: underline;
+    background-color: #d6e4ff;
+    color: #007bff;
 }
 
 /* END OF HEADER STYLES */

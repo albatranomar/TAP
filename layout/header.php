@@ -18,7 +18,7 @@ if (isset($_SESSION["user"])) {
                 <a href="<?php echo ROOT ?>/profile.php">User Name</a>
             <?php } else { ?>
                 <a href="<?php echo ROOT ?>/login.php">Login</a>
-                <a href="<?php echo ROOT ?>/signup.php">Sign Up</a>
+                <a href="<?php echo ROOT ?>/register.php">Register</a>
             <?php } ?>
         </div>
     </div>
