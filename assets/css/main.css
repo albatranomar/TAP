@@ -7,6 +7,8 @@ body {
     flex-direction: column;
 }
 
+/* HEADER STYLES */
+
 header {
     background-color: whitesmoke;
     padding: 10px;
@@ -55,6 +57,19 @@ header {
     text-decoration: underline;
 }
 
+/* END OF HEADER STYLES */
+
+
+
+.container {
+    display: flex;
+    flex: 1 1 0;
+}
+
+
+
+/* SIDE NAV STYLES */
+
 .side-nav {
     background-color: whitesmoke;
     padding: 20px;
@@ -87,16 +102,19 @@ header {
     color: #007bff;
 }
 
+/* END OF SIDE NAV STYLES */
+
+/* MAIN STYLES */
+
 main {
     flex: 1 1 0;
     padding: 20px;
     background-color: white;
 }
 
-.container {
-    display: flex;
-    flex: 1 1 0;
-}
+/* END OF MAIN STYLES */
+
+/* FOOTER STYLES */
 
 footer {
     background-color: whitesmoke;
