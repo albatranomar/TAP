@@ -8,6 +8,14 @@ if (isset($_SESSION["user"])) {
     $user = unserialize($_SESSION["user"]);
 }
 
+if ($user && $user instanceof User) {
+    if ($user->getRole() == "Team Member") {
+        header("Location: tasks.php");
+    } else {
+        header("Location: projects.php");
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,10 +32,7 @@ if (isset($_SESSION["user"])) {
     <div class="container">
         <?php require_once "./layout/side_nav.php" ?>
         <main>
-            <?php if ($user && $user instanceof User) { ?>
-                <h2>Welcome <?php echo $user->getName() ?></h2>
-                <p>This is where the main content will appear.</p>
-            <?php } else { ?>
+            <?php if (!$user) { ?>
                 <h2>Access Denied!</h2>
                 <a class="go-to-login" href="./login.php">Go Login</a>
             <?php } ?>
