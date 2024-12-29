@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+require_once("./db.inc.php");
 require "./utils/utils.php";
 require "./models/User.php";
 require "./models/Address.php";
@@ -22,21 +23,27 @@ $is_post = $_SERVER["REQUEST_METHOD"] == "POST";
 $errors = [];
 $padded_user_id = "UNKNOWN";
 
-if (isset($_SESSION["register_progress"])) {
-    $progress = $_SESSION["register_progress"];
-
-    if ($progress < 0 || $progress > 4) {
-        $_SESSION["register_progress"] = 1;
-        $_SESSION["new_user"] = null;
-        $progress = 1;
-    }
-}
-
-if (isset($_SESSION["new_user"])) {
-    $new_user = unserialize($_SESSION["new_user"]);
+if (!$is_post) {
+    $_SESSION["register_progress"] = 1;
+    $_SESSION["new_user"] = null;
+    $progress = 1;
 }
 
 if ($is_post) {
+    if (isset($_SESSION["register_progress"])) {
+        $progress = $_SESSION["register_progress"];
+
+        if ($progress < 0 || $progress > 4) {
+            $_SESSION["register_progress"] = 1;
+            $_SESSION["new_user"] = null;
+            $progress = 1;
+        }
+    }
+
+    if (isset($_SESSION["new_user"])) {
+        $new_user = unserialize($_SESSION["new_user"]);
+    }
+
     if ($progress == 1) {
         $name = getPostField("name", $errors);
         $flat = getPostField("flat", $errors);
@@ -71,7 +78,11 @@ if ($is_post) {
         $password = getPostField("password", $errors);
         $confirmPassword = getPostField("confirmPassword", $errors);
 
-        if (!isset($errors["password"]) && !preg_match("/^[a-zA-Z0-9]{8,12}$/", $password)) {
+        $isAvailable = User::isUsernameAvailable($db, $username);
+
+        if (!isset($errors["username"]) && !$isAvailable) {
+            $errors["username"] = "The username is already been taken!";
+        } else if (!isset($errors["password"]) && !preg_match("/^[a-zA-Z0-9]{8,12}$/", $password)) {
             $errors["password"] = "Password must be 8–12 characters and contain letters/numbers.";
         } else if (!isset($errors["confirmPassword"]) && $password !== $confirmPassword) {
             $errors["confirmPassword"] = "Passwords must match.";
@@ -94,8 +105,6 @@ if ($is_post) {
             $errors[] = "Skills are missing!";
         } else {
             try {
-                require_once("./db.inc.php");
-
                 $new_user->save($db);
                 $user_id = $db->lastInsertId();
                 $padded_user_id = str_pad($user_id, 10, "0", STR_PAD_LEFT);
