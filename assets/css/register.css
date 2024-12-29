@@ -18,6 +18,7 @@ input[type="email"],
 input[type="date"],
 input[type="tel"],
 input[type="number"],
+input[type="password"],
 select {
     width: 100%;
     padding: 8px;
@@ -27,7 +28,10 @@ select {
 
 input[type="text"]:invalid,
 input[type="email"]:invalid,
+input[type="date"]:invalid,
 input[type="tel"]:invalid,
+input[type="number"]:invalid,
+input[type="password"]:invalid,
 select:invalid {
     border-color: red;
 }

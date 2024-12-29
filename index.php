@@ -1,10 +1,11 @@
 <?php
 session_start();
+require "./models/User.php";
 
 $user = null;
 
 if (isset($_SESSION["user"])) {
-    $user = $_SESSION["user"];
+    $user = unserialize($_SESSION["user"]);
 }
 
 ?>

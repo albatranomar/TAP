@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once("./db.inc.php");
+require "./db.inc.php";
 require "./utils/utils.php";
 require "./models/User.php";
 require "./models/Address.php";
@@ -78,7 +78,10 @@ if ($is_post) {
         $password = getPostField("password", $errors);
         $confirmPassword = getPostField("confirmPassword", $errors);
 
-        $isAvailable = User::isUsernameAvailable($db, $username);
+        $isAvailable = false;
+        if ($username != null) {
+            $isAvailable = User::isUsernameAvailable($db, $username);
+        }
 
         if (!isset($errors["username"]) && !$isAvailable) {
             $errors["username"] = "The username is already been taken!";
@@ -152,7 +155,7 @@ if ($is_post) {
         <main>
             <?php if ($progress == 1) {
                 require_once("./layout/register/user_information_form.php");
-                generateUserInfoForm($errors);
+                generateUserInfoForm($db, $errors);
             } ?>
 
             <?php if ($progress == 2) {

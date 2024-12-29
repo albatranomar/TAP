@@ -1,8 +1,8 @@
 <?php
-function generateUserInfoForm(array $errors)
+function generateUserInfoForm(DatabaseHelper $db, array $errors)
 {
     require_once "config.inc.php";
-    require_once "db.inc.php";
+
     $roles = $db->getEnumValues('user', 'role');
 
     ?>
@@ -110,5 +110,8 @@ function generateUserInfoForm(array $errors)
 
             <button type="submit">Proceed</button>
         </form>
+
+        <br>
+        <a href="<?php echo ROOT ?>/login.php">You already have an account?</a>
     </div>
 <?php } ?>
