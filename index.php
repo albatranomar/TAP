@@ -29,6 +29,7 @@ if (isset($_SESSION["user"])) {
                 <p>This is where the main content will appear.</p>
             <?php } else { ?>
                 <h2>Access Denied!</h2>
+                <a class="go-to-login" href="./login.php">Go Login</a>
             <?php } ?>
         </main>
     </div>

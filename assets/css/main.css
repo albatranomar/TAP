@@ -18,6 +18,11 @@ header {
     border-bottom: 1px solid slategray;
 }
 
+header h1 a {
+    text-decoration: none;
+    color: black;
+}
+
 .nav-links {
     display: flex;
     align-items: center;
@@ -76,23 +81,34 @@ header {
 
 .side-nav {
     background-color: whitesmoke;
-    padding: 20px;
     border-right: 1px solid #ccc;
-    width: 200px;
+    width: 300px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.side-nav div {
+    width: 100%;
 }
 
 .side-nav a {
     display: flex;
     align-items: center;
-    margin: 10px 0;
     text-decoration: none;
     color: gray;
-    padding: 8px 15px;
+    padding: 15px 0;
     border-radius: 5px;
     font-size: 16px;
+    width: 100%;
+}
+
+.side-nav a img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
 }
 
 .side-nav a.active {
@@ -142,4 +158,17 @@ footer a:hover {
 .red-text {
     color: red;
     font-weight: bold;
+}
+
+.go-to-login {
+    text-decoration: none;
+    color: blueviolet;
+    margin-right: 15px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.go-to-login:hover {
+    background-color: blueviolet;
+    color: white;
 }

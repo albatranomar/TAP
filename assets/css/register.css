@@ -54,16 +54,3 @@ button:hover {
     color: red;
     font-size: 12px;
 }
-
-.go-to-login {
-    text-decoration: none;
-    color: blueviolet;
-    margin-right: 15px;
-    padding: 5px;
-    border-radius: 5px;
-}
-
-.go-to-login:hover {
-    background-color: blueviolet;
-    color: white;
-}
