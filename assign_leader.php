@@ -131,7 +131,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             </div>
                         </form>
                         <?php if ($successPost) { ?>
-                            <p class="success">Project Leader successfully allocated</p>
+                            <p class="success">Team Leader successfully
+                                allocated to Project <?php echo $project->getId() ?></p>
                         <?php } ?>
                     </section>
                     <section>
