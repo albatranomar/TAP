@@ -169,6 +169,17 @@ class User
         );
     }
 
+    public static function isUsernameAvailable(DatabaseHelper $db, string $username)
+    {
+        $stmt = $db->query("SELECT username FROM user WHERE username = :username", ["username" => $username]);
+
+        if ($stmt->rowCount() > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public static function findById(DatabaseHelper $databaseHelper, string $id): ?User
     {
         $user = $databaseHelper->fetchOne("SELECT * FROM `user` WHERE `id` = :id", ['id' => $id]);
