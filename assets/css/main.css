@@ -136,3 +136,10 @@ footer a {
 footer a:hover {
     text-decoration: underline;
 }
+
+/* UTIL CLASSES */
+
+.red-text {
+    color: red;
+    font-weight: bold;
+}

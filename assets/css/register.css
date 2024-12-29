@@ -1,0 +1,65 @@
+.form-container {
+    width: 400px;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="tel"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+input[type="text"]:invalid,
+input[type="email"]:invalid,
+input[type="tel"]:invalid,
+select:invalid {
+    border-color: red;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: green;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+.go-to-login {
+    text-decoration: none;
+    color: blueviolet;
+    margin-right: 15px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.go-to-login:hover {
+    background-color: blueviolet;
+    color: white;
+}
