@@ -123,6 +123,17 @@ class Project
         return Document::findByProjectId($databaseHelper, $this->id);
     }
 
+    public static function isIdAvailable(DatabaseHelper $db, string $id)
+    {
+        $stmt = $db->query("SELECT id FROM project WHERE id = :id", ["id" => $id]);
+
+        if ($stmt->rowCount() > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public static function fromArray(array $data): Project
     {
         return new Project(
