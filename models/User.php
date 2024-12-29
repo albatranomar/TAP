@@ -188,7 +188,7 @@ class User
         return $users;
     }
 
-    public function save(DatabaseHelper $databaseHelper): bool
+    public function save(DatabaseHelper $databaseHelper)
     {
         $sql = $this->id === null
             ? "INSERT INTO `user` (name, dob, email, phone, role, qualification, username, password, image, ssn)
@@ -219,7 +219,7 @@ class User
         );
     }
 
-    public function delete(DatabaseHelper $databaseHelper): bool
+    public function delete(DatabaseHelper $databaseHelper)
     {
         $sql = "DELETE FROM `user` WHERE `id` = :id";
         return $databaseHelper->execute($sql, ['id' => $this->id]);

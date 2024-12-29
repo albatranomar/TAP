@@ -157,7 +157,7 @@ class Project
         return $projects;
     }
 
-    public function save(DatabaseHelper $databaseHelper): bool
+    public function save(DatabaseHelper $databaseHelper)
     {
         $sql = "
             INSERT INTO `project` (id, title, description, customer, budget, start_date, end_date, manager, team_leader)
@@ -186,7 +186,7 @@ class Project
         ]);
     }
 
-    public function delete(DatabaseHelper $databaseHelper): bool
+    public function delete(DatabaseHelper $databaseHelper)
     {
         $sql = "DELETE FROM `project` WHERE `id` = :id";
         return $databaseHelper->execute($sql, ['id' => $this->id]);

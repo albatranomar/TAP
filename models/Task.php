@@ -175,7 +175,7 @@ class Task
         return $tasks;
     }
 
-    public function save(DatabaseHelper $databaseHelper): bool
+    public function save(DatabaseHelper $databaseHelper)
     {
         $sql = $this->id === null
             ? "INSERT INTO `task` (name, description, project_id, start_date, end_date, effort, status, priority, progress) 
@@ -203,7 +203,7 @@ class Task
         return $databaseHelper->execute($sql, $params);
     }
 
-    public function delete(DatabaseHelper $databaseHelper): bool
+    public function delete(DatabaseHelper $databaseHelper)
     {
         $sql = "DELETE FROM `task` WHERE `id` = :id";
         return $databaseHelper->execute($sql, ['id' => $this->id]);

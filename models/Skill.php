@@ -2,10 +2,10 @@
 class Skill
 {
     private string $user_id;
-    private int $skill_id;
+    private ?int $skill_id;
     private string $skill;
 
-    public function __construct(string $user_id, int $skill_id, string $skill)
+    public function __construct(string $user_id, ?int $skill_id, string $skill)
     {
         $this->user_id = $user_id;
         $this->skill_id = $skill_id;
@@ -22,7 +22,7 @@ class Skill
         $this->user_id = $user_id;
     }
 
-    public function getSkillId(): int
+    public function getSkillId(): ?int
     {
         return $this->skill_id;
     }
@@ -46,7 +46,7 @@ class Skill
     {
         return new Skill(
             $data['user_id'],
-            (int) $data['skill_id'],
+            isset($data['skill_id']) ? (int) $data['skill_id'] : null,
             $data['skill']
         );
     }
@@ -75,23 +75,29 @@ class Skill
         return $skills;
     }
 
-    public function save(DatabaseHelper $databaseHelper): bool
+    public function save(DatabaseHelper $databaseHelper)
     {
-        $sql = "
-            INSERT INTO `skill` (user_id, skill_id, skill)
-            VALUES (:user_id, :skill_id, :skill)
+        $sql = $this->skill_id === null ?
+            "INSERT INTO `skill` (user_id, skill)
+            VALUES (:user_id, :skill)
             ON DUPLICATE KEY UPDATE
-                skill = VALUES(skill)
-        ";
+                skill = VALUES(skill)"
+            :
+            "UPDATE `skill` SET skill = :skill WHERE skill_id = :skill_id";
 
-        return $databaseHelper->execute($sql, [
+        $params = [
             'user_id' => $this->user_id,
-            'skill_id' => $this->skill_id,
             'skill' => $this->skill,
-        ]);
+        ];
+
+        if (!is_null($this->skill_id)) {
+            $params["skill_id"] = $this->skill_id;
+        }
+
+        return $databaseHelper->execute($sql, $params);
     }
 
-    public function delete(DatabaseHelper $databaseHelper): bool
+    public function delete(DatabaseHelper $databaseHelper)
     {
         $sql = "DELETE FROM `skill` WHERE `skill_id` = :skill_id";
         return $databaseHelper->execute($sql, ['skill_id' => $this->skill_id]);

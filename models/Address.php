@@ -101,7 +101,7 @@ class Address
         return $addresses;
     }
 
-    public function save(DatabaseHelper $databaseHelper): bool
+    public function save(DatabaseHelper $databaseHelper)
     {
         $sql = "
             INSERT INTO `address` (user_id, country, city, street, flat)

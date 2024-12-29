@@ -74,7 +74,7 @@ class Document
         return $documents;
     }
 
-    public function save(DatabaseHelper $databaseHelper): bool
+    public function save(DatabaseHelper $databaseHelper)
     {
         $sql = $this->document_id === null
             ? "INSERT INTO `document` (project_id, title) VALUES (:project_id, :title)"
@@ -87,7 +87,7 @@ class Document
         return $databaseHelper->execute($sql, $params);
     }
 
-    public function delete(DatabaseHelper $databaseHelper): bool
+    public function delete(DatabaseHelper $databaseHelper)
     {
         $sql = "DELETE FROM `document` WHERE `document_id` = :document_id";
         return $databaseHelper->execute($sql, ['document_id' => $this->document_id]);

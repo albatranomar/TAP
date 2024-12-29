@@ -113,7 +113,7 @@ class UserTask
         return $userTasks;
     }
 
-    public function save(DatabaseHelper $databaseHelper): bool
+    public function save(DatabaseHelper $databaseHelper)
     {
         $sql = "
             INSERT INTO `user_task` (user_id, task_id, role, contribution, accepted)
@@ -133,7 +133,7 @@ class UserTask
         ]);
     }
 
-    public function delete(DatabaseHelper $databaseHelper): bool
+    public function delete(DatabaseHelper $databaseHelper)
     {
         $sql = "DELETE FROM `user_task` WHERE `user_id` = :user_id AND `task_id` = :task_id";
         return $databaseHelper->execute($sql, [
