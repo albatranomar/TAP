@@ -1,0 +1,42 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+tr:nth-child(odd) {
+    background-color: slategray;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #ddd;
+}
+
+tr:hover {
+    background-color: #dddddd77;
+    color: black;
+}
+
+.allocate-btn {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    padding: 15px 0;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+}
+
+.allocate-btn img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}

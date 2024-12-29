@@ -15,7 +15,7 @@ if (isset($_SESSION["user"])) {
     $user = unserialize($_SESSION["user"]);
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && $user && $user instanceof User && $user->getRole() == "Manager") {
     $id = getPostField("id", $errors);
     $title = getPostField("title", $errors);
     $description = getPostField("description", $errors);
@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if (count($errors) == 0) {
                 try {
-                    $project = new Project($id, $title, $description, $customer, $budget, $start_date, $end_date);
+                    $project = new Project($id, $title, $description, $customer, $budget, $start_date, $end_date, $user->getId());
                     $project->save($db);
 
                     for ($i = 0; $i < count($files['name']); $i++) {
@@ -133,7 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <form action="<?php $_SERVER["PHP_SELF"] ?>" method="post" enctype="multipart/form-data">
                             <div>
                                 <label for="id">Project ID *</label>
-                                <input type="text" id="id" name="id" placeholder="e.g., ABCD-12345" pattern="^[A-Z]{4}-\d{5}$"
+                                <input type="text" id="id" name="id" placeholder="e.g. ABCD-12345" pattern="^[A-Z]{4}-\d{5}$"
                                     required>
                                 <?php if (isset($errors['id'])) {
                                     echo '<p class="error">' . $errors['id'] . '</p>';
