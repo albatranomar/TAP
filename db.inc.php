@@ -33,13 +33,9 @@ class DatabaseHelper
 
     public function query($sql, $params = [])
     {
-        try {
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->execute($params);
-            return $stmt;
-        } catch (PDOException $e) {
-            die("Query failed: " . $e->getMessage());
-        }
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($params);
+        return $stmt;
     }
 
     public function fetchOne($sql, $params = [])
