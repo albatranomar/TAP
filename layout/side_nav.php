@@ -27,26 +27,33 @@ function setup(string $name)
     <?php if ($user && $user instanceof User) { ?>
         <div>
             <?php if ($user->getRole() != "Team Member") { ?>
-                <a <?php setup("projects.php") ?>><img src="<?php echo $icons_path ?>/view-list.png" alt="view list image"> View
-                    Projects</a>
+                <a <?php setup("projects.php") ?>>
+                    <img src="<?php echo $icons_path ?>/view-list.png" alt="view list image"> View Projects
+                </a>
             <?php } ?>
 
             <?php if ($user->getRole() == "Manager") { ?>
-                <a <?php setup("new_project.php") ?>><img src="<?php echo $icons_path ?>/new-project.png"
-                        alt="new project image"> New Project</a>
-                <a <?php setup("assign_leader.php") ?>><img src="<?php echo $icons_path ?>/assign_leader.png"
-                        alt="assign leader image"> Assign Team
-                    Leader</a>
+                <a <?php setup("new_project.php") ?>>
+                    <img src="<?php echo $icons_path ?>/new-project.png" alt="new project image"> New Project
+                </a>
+                <a <?php setup("assign_leader.php") ?>>
+                    <img src="<?php echo $icons_path ?>/assign_leader.png" alt="assign leader image"> Assign Team Leader
+                </a>
             <?php } ?>
-            <a <?php setup("tasks.php") ?>><img src="<?php echo $icons_path ?>/view-list.png" alt="view list image">
-                Tasks</a>
+
+            <a <?php setup("tasks.php") ?>>
+                <img src="<?php echo $icons_path ?>/view-list.png" alt="view list image"> Tasks
+            </a>
+            <a <?php setup("task_details.php") ?>>
+                <img src="<?php echo $icons_path ?>/search_task.png" alt="search task image"> View Task Details
+            </a>
             <?php if ($user->getRole() == "Project Leader") { ?>
-                <a <?php setup("new_task.php") ?>><img src="<?php echo $icons_path ?>/new_task.png" alt="new task image"> New
-                    Task</a>
-                <a <?php setup("task_details.php") ?>><img src="<?php echo $icons_path ?>/search_task.png"
-                        alt="search task image"> View Task Details</a>
-                <a <?php setup("assign_member.php") ?>><img src="<?php echo $icons_path ?>/assign_member.png"
-                        alt="assign member image"> Assign Team Member To Task</a>
+                <a <?php setup("new_task.php") ?>>
+                    <img src="<?php echo $icons_path ?>/new_task.png" alt="new task image"> New Task
+                </a>
+                <a <?php setup("assign_member.php") ?>>
+                    <img src="<?php echo $icons_path ?>/assign_member.png" alt="assign member image"> Assign Team Member To Task
+                </a>
             <?php } ?>
 
             <?php if ($user->getRole() != "Manager") { ?>
