@@ -64,10 +64,14 @@ if (isset($_SESSION["user"])) {
                                     <td><?php echo $project->getTitle() ?></td>
                                     <td><?php echo $project->getStartDate() ?></td>
                                     <td><?php echo $project->getEndDate() ?></td>
-                                    <?php if ($project->getTeamLeader() == null && $user->getRole() == "Manager") { ?>
-                                        <td><a class="allocate-btn" href="./assign_leader.php?pid=<?php echo $project->getId(); ?>"><img
-                                                    src="<?php echo $icons_path ?>/assign_leader.png" alt="assign leader image">
-                                                Allocate Team Leader</a></td>
+                                    <?php if ($project->getTeamLeader() == null) { ?>
+                                        <?php if ($user->getRole() == "Manager") { ?>
+                                            <td><a class="allocate-btn" href="./assign_leader.php?pid=<?php echo $project->getId(); ?>"><img
+                                                        src="<?php echo $icons_path ?>/assign_leader.png" alt="assign leader image">
+                                                    Allocate Team Leader</a></td>
+                                        <?php } else { ?>
+                                            <td>Not Allowed</td>
+                                        <?php } ?>
                                     <?php } else { ?>
                                         <td>Already allocated</td>
                                     <?php } ?>
