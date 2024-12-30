@@ -53,20 +53,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $user && $user instanceof User && $u
         }
 
         if (count($errors) == 0) {
-            $allowedTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'image/png', 'image/jpeg'];
+            $allowedTypes = ['pdf', 'docx', 'png', 'jpeg'];
             $maxSize = 2 * 1024 * 1024;
 
             for ($i = 0; $i < count($files['name']); $i++) {
                 $fileName = $files['name'][$i];
-                $fileType = $files['type'][$i];
                 $fileSize = $files['size'][$i];
                 $tmpName = $files['tmp_name'][$i];
                 $fileError = $files['error'][$i];
 
+                $parts = explode('.', $fileName);
+                $fileExtension = strtolower(end($parts));
+
                 if ($fileName == '')
                     continue;
 
-                if (!in_array($fileType, $allowedTypes)) {
+                if (!in_array($fileExtension, $allowedTypes)) {
                     $errors['files[]'] = "Invalid file type for '$fileName'. Allowed types are PDF, DOCX, PNG, JPG.";
                     break;
                 }
