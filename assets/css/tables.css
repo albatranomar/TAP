@@ -25,7 +25,7 @@ tr:hover {
 }
 
 .allocate-btn {
-    display: flex;
+    /* display: flex; */
     align-items: center;
     text-decoration: none;
     color: inherit;
@@ -39,4 +39,50 @@ tr:hover {
     width: 20px;
     height: 20px;
     margin-right: 10px;
+}
+
+select {
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+button {
+    padding: 5px;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.low-priority {
+    background-color: green;
+    color: white;
+}
+
+.medium-priority {
+    background-color: yellow;
+    color: black;
+}
+
+.high-priority {
+    background-color: red;
+    color: white;
+}
+
+.pending {
+    font-style: italic;
+    background-color: gray;
+}
+
+.in-progress {
+    font-weight: bold;
+    background-color: lightblue;
+}
+
+.completed {
+    text-decoration: line-through;
+    border: 2px solid green;
 }
