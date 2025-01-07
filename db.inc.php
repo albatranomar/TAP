@@ -31,7 +31,7 @@ class DatabaseHelper
         }
     }
 
-    public function query($sql, $params = [])
+    public function query($sql, $params = []): bool|PDOStatement
     {
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($params);
