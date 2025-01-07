@@ -265,7 +265,7 @@ function getPriorityClass(Task $task)
                                     <a class="allocate-btn" href="./task_details.php?tid=<?php echo $task->getId(); ?>">
                                         <img src="<?php echo $icons_path ?>/search_task.png" alt="search task image">
                                     </a>
-                                    <?php if ($user->getRole() != "Manager") { ?>
+                                    <?php if ($user->getRole() == "Team Member") { ?>
                                         <a class="allocate-btn" href="./update_task.php?tid=<?php echo $task->getId(); ?>">
                                             <img src="<?php echo $icons_path ?>/edit.png" alt="edit task image">
                                         </a>
