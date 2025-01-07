@@ -152,6 +152,13 @@ class Task
         );
     }
 
+    public static function findById(DatabaseHelper $databaseHelper, string $id)
+    {
+        $task = $databaseHelper->fetchOne("SELECT * FROM `task` WHERE `id` = :id", ['id' => $id]);
+
+        return $task ? self::fromArray($task) : null;
+    }
+
     public static function findByProjectId(DatabaseHelper $databaseHelper, string $project_id): array
     {
         $db_tasks = $databaseHelper->fetchAll(

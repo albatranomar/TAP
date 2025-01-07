@@ -1,5 +1,7 @@
 <?php
 require_once "config.inc.php";
+require_once "./models/User.php";
+require_once "./models/Task.php";
 
 $icons_path = ROOT . "/assets/images/icons";
 
@@ -10,13 +12,23 @@ if (isset($_SESSION["user"])) {
 }
 
 
-function setup(string $name)
+function setup(string $name, bool $hasAssignments = false)
 {
     $page = basename($_SERVER["PHP_SELF"]);
     $out = 'href="' . ROOT . '/' . $name . '"';
 
+    $classes = [];
+
     if ($page == $name) {
-        $out .= ' class="active"';
+        $classes[] = 'active';
+    }
+
+    if ($hasAssignments) {
+        $classes[] = 'highlight';
+    }
+
+    if (!empty($classes)) {
+        $out .= ' class="' . implode(' ', $classes) . '"';
     }
 
     echo $out;
@@ -61,9 +73,14 @@ function setup(string $name)
                     Update Task</a>
             <?php } ?>
 
-            <?php if ($user->getRole() == "Team Member") { ?>
-                <a <?php setup("assignments.php") ?>><img src="<?php echo $icons_path ?>/assignments.png"
-                        alt="assignments image"> Assignments</a>
+            <?php if ($user->getRole() == "Team Member") {
+                $not_accepted_tasks = $db->fetchAll("SELECT t.* FROM task t JOIN user_task ut ON t.id = ut.task_id WHERE ut.user_id = ? AND ut.accepted = 0", [$user->getId()]);
+                ?>
+
+                <a <?php setup("assignments.php", count($not_accepted_tasks) > 0) ?>>
+                    <img src="<?php echo $icons_path ?>/assignments.png" alt="assignments image"> Assignments
+                </a>
+
             <?php } ?>
         </div>
         <div>

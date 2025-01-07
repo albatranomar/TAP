@@ -7,13 +7,16 @@ class UserTask
     private float $contribution;
     private bool $accepted;
 
-    public function __construct(string $user_id, int $task_id, string $role, float $contribution, bool $accepted)
+    private string $start_date;
+
+    public function __construct(string $user_id, int $task_id, string $role, float $contribution, bool $accepted, string $start_date)
     {
         $this->user_id = $user_id;
         $this->task_id = $task_id;
         $this->role = $role;
         $this->contribution = $contribution;
         $this->accepted = $accepted;
+        $this->start_date = $start_date;
     }
 
     public function getUserId(): string
@@ -66,6 +69,16 @@ class UserTask
         $this->accepted = $accepted;
     }
 
+    public function getStartDate(): string
+    {
+        return $this->start_date;
+    }
+
+    public function setStartDate(string $start_date)
+    {
+        $this->start_date = $start_date;
+    }
+
     public static function fromArray(array $data): UserTask
     {
         return new UserTask(
@@ -73,7 +86,8 @@ class UserTask
             (int) $data['task_id'],
             $data['role'],
             (float) $data['contribution'],
-            (bool) $data['accepted']
+            (bool) $data['accepted'],
+            $data["start_date"]
         );
     }
 
@@ -116,12 +130,13 @@ class UserTask
     public function save(DatabaseHelper $databaseHelper)
     {
         $sql = "
-            INSERT INTO `user_task` (user_id, task_id, role, contribution, accepted)
-            VALUES (:user_id, :task_id, :role, :contribution, :accepted)
+            INSERT INTO `user_task` (user_id, task_id, role, contribution, accepted, start_date)
+            VALUES (:user_id, :task_id, :role, :contribution, :accepted, :start_date)
             ON DUPLICATE KEY UPDATE
                 role = VALUES(role),
                 contribution = VALUES(contribution),
-                accepted = VALUES(accepted)
+                accepted = VALUES(accepted),
+                start_date = VALUES(start_date)
         ";
 
         return $databaseHelper->execute($sql, [
@@ -130,6 +145,7 @@ class UserTask
             'role' => $this->role,
             'contribution' => $this->contribution,
             'accepted' => $this->accepted,
+            'start_date' => $this->start_date
         ]);
     }
 

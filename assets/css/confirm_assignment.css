@@ -1,0 +1,23 @@
+.accept-button {
+    display: inline;
+    padding: 5px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}
+
+.reject-button {
+    display: inline;
+    padding: 5px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}

@@ -1,0 +1,39 @@
+.details-container {
+    display: flex;
+    gap: 20px;
+}
+
+.area {
+    flex: 1;
+    padding: 20px;
+}
+
+.area div {
+    margin-bottom: 10px;
+    font-size: large;
+}
+
+.area span {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.highlight {
+    font-weight: bold;
+    background-color: lightblue;
+    color: darkblue;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+.team-member-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.team-member-photo:hover {
+    box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.4);
+    border: 1px solid #007BFF;
+}

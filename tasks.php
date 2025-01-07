@@ -74,7 +74,7 @@ function generateTaskSearchQuery($params, $userType, $sortOn, $sortOrder)
     if ($userType == 'Project Leader') {
         $conditions[] = "p.team_leader = :user_id";
     } elseif ($userType == 'Team Member') {
-        $conditions[] = "ut.user_id = :user_id";
+        $conditions[] = "ut.user_id = :user_id AND ut.accepted = 1";
     }
 
     if (!empty($params['id'])) {
@@ -247,7 +247,7 @@ function getPriorityClass(Task $task)
                                 <td><?php echo $task->getEndDate() ?></td>
                                 <td class="<?php getStatusClass($task) ?>"><?php echo $task->getStatus() ?></td>
                                 <td class="<?php getPriorityClass($task) ?>"><?php echo $task->getPriority() ?></td>
-                                <td><?php echo $task->getProgress() * 100 . "%" ?></td>
+                                <td><?php echo $task->getProgress() . "%" ?></td>
                                 <?php
                                 $taskProject = $db->fetchOne("SELECT id, title FROM project WHERE id = (SELECT project_id FROM task WHERE id = ?)", [$task->getId()]);
                                 if ($taskProject != null) {
