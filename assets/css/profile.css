@@ -1,0 +1,32 @@
+.profile-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-container section label {
+    font-weight: bold;
+}
+
+.profile-container section p {
+    margin: 5px 0 15px;
+}
+
+.profile-container figure {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-container figure img {
+    max-width: 150px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+}
