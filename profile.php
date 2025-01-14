@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+require_once "db.inc.php";
 require_once "config.inc.php";
 require "./models/User.php";
 

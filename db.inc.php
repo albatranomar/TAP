@@ -1,15 +1,15 @@
 <?php
-// define('DBHOST', '176.119.254.176');
-// define('DBNAME', 'web1221344_ticketSystem');
-// define('DBUSER', 'web1221344_dbuser');
-// define('DBPASS', 'E@323kRfnX');
-// define('DBCONNSTRING',"mysql:host=". DBHOST. ";dbname=". DBNAME);
-
-define('DBHOST', 'localhost');
-define('DBNAME', 'tap');
-define('DBUSER', 'root');
-define('DBPASS', '');
+define('DBHOST', '176.119.254.176');
+define('DBNAME', 'web1221344_tap');
+define('DBUSER', 'web1221344_dbuser');
+define('DBPASS', 'E@323kRfnX');
 define('DBCONNSTRING', "mysql:host=" . DBHOST . ";dbname=" . DBNAME);
+
+// define('DBHOST', 'localhost');
+// define('DBNAME', 'tap');
+// define('DBUSER', 'root');
+// define('DBPASS', '');
+// define('DBCONNSTRING', "mysql:host=" . DBHOST . ";dbname=" . DBNAME);
 
 $db = new DatabaseHelper();
 

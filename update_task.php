@@ -108,8 +108,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div>
                                 <label for="progress">Progress</label>
                                 <output for="progress"><?php echo $task->getProgress() ?></output>
-                                <input type="range" name="progress" id="progress" min="<?php echo $task->getProgress() ?>"
-                                    max="100" step="0.1" value="<?php echo $task->getProgress() ?>"
+                                <input type="range" name="progress" id="progress" min="0" max="100" step="0.1"
+                                    value="<?php echo $task->getProgress() ?>"
                                     oninput="this.previousElementSibling.value = this.value">
                                 <?php if (isset($errors["progress"])) {
                                     echo '<p class="error">' . $errors['progress'] . '</p>';

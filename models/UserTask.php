@@ -144,7 +144,7 @@ class UserTask
             'task_id' => $this->task_id,
             'role' => $this->role,
             'contribution' => $this->contribution,
-            'accepted' => $this->accepted,
+            'accepted' => $this->accepted ? 1 : 0,
             'start_date' => $this->start_date
         ]);
     }
