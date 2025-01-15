@@ -68,15 +68,11 @@ function setup(string $name, bool $hasAssignments = false)
                 </a>
             <?php } ?>
 
-            <?php if ($user->getRole() != "Manager") { ?>
-                <a <?php setup("update_task.php") ?>><img src="<?php echo $icons_path ?>/edit.png" alt="edit image">
-                    Update Task</a>
-            <?php } ?>
-
             <?php if ($user->getRole() == "Team Member") {
                 $not_accepted_tasks = $db->fetchAll("SELECT t.* FROM task t JOIN user_task ut ON t.id = ut.task_id WHERE ut.user_id = ? AND ut.accepted = 0", [$user->getId()]);
                 ?>
-
+                <a <?php setup("update_task.php") ?>><img src="<?php echo $icons_path ?>/edit.png" alt="edit image">
+                    Update Task</a>
                 <a <?php setup("assignments.php", count($not_accepted_tasks) > 0) ?>>
                     <img src="<?php echo $icons_path ?>/assignments.png" alt="assignments image"> Assignments
                 </a>
