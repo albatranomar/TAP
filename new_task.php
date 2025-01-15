@@ -29,8 +29,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $user && $user instanceof User && $u
         $project = Project::findById($db, $project_id);
 
         if ($project) {
-            if (strtotime($start_date) <= strtotime(date('Y-m-d')) || strtotime($start_date) < strtotime($project->getStartDate())) {
-                $errors["start_date"] = "Start Date must be greater than today and greater or equal to the start date of the project!";
+            if (strtotime($start_date) < strtotime(date('Y-m-d'))) {
+                $errors["start_date"] = "Start Date must be after today!";
+            } else if (strtotime($start_date) < strtotime($project->getStartDate())) {
+                $errors["start_date"] = "Start Date must be after the start date of the project! [ " . $project->getStartDate() . " ]";
             }
 
             if (strtotime($end_date) <= strtotime($start_date) || strtotime($end_date) > strtotime($project->getEndDate())) {
